@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Find duplicates Choose path</title>
+        <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Choose path</h1>
+            <form action="path" method="POST">
+                <div th:each="path : ${roots}" class="row">
+                    <div class="col-md-1">
+                        <div th:if="${!#strings.endsWith(path, '..')}">
+                            <input class="form-check-input" type="checkbox" name="selectedRoots" th:value="${path}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <input class="btn btn-link" type="submit" name="command" th:value="${path}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <input class="form-check-input" type="checkbox" id="selectAll"/>
+                    </div>
+                    <div class="col-md-11">
+                        <span>Select All</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input class="btn btn-success" type="submit" name="command" value="Start"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script type="text/javascript" src="jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="bootstrap.js"></script>
+        <script>
+            $("#selectAll").click(function () {
+                $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+            });
+        </script>
+    </body>
+</html>
