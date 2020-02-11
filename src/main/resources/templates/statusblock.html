@@ -14,30 +14,5 @@ and open the template in the editor.
         <div th:fragment="status" th:unless="${status.isEmpty()}" id="diskresultblock">
             <p th:text="${status}"></p>
         </div>
-        <div th:fragment="result" th:unless="${status.isEmpty()}" id="diskresultblock">
-            <table class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr class="table-warning">
-                        <td class="text-center">Sha</td>
-                        <td class="text-center">Size</td>
-                    </tr>
-                    <tr class="table-primary">
-                        <td class="text-center" colspan="2">File name</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <div th:remove="tag" th:each="r : ${result}">
-                        <tr class="table-success">
-                            <td th:text="${r.sha}"></td>
-                            <td class="text-center" th:text="${r.getSizeHuman()}"></td>
-                        </tr>
-                        <tr th:each="f : ${r.files}">
-                            <td colspan="2" th:text="${f.pathname}"></td>
-                        </tr>
-                    </div>
-                </tbody>
-            </table>
-            <a class="btn btn-success" th:href="@{/}">Choose disk</a>
-        </div>
     </body>
 </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Find duplication result</title>
+        <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <form th:action="@{/delete}" method="POST">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="table-warning">
+                        <td colspan="2" class="col-md-10 text-center">Sha</td>
+                        <td class="col-md-2 text-center">Size</td>
+                    </tr>
+                    <tr class="table-primary">
+                        <td class="col-md-11 text-center" colspan="2">File name</td>
+                        <td class="col-md-1 text-center">Remove</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div th:remove="tag" th:each="r : ${result}">
+                        <tr class="table-success">
+                            <td class="col-md-10 text-center" colspan="2" th:text="${r.sha}"></td>
+                            <td class="col-md-2 text-center" th:text="${r.getSizeHuman()}"></td>
+                        </tr>
+                        <tr th:each="f : ${r.files}">
+                            <td class="col-md-1 text-center">
+                                <img class="img-fluid" alt="Remove" th:if="${f.isRemove()}" th:src="@{/images/RemoveFile.png}"/>
+                                <img class="img-fluid" alt="Exist" th:unless="${f.isRemove()}" th:src="@{/images/ExistFile.png}"/>
+                            </td>
+                            <td class="col-md-10 text-center" th:text="${f.pathname}"></td>
+                            <td class="col-md-1 text-center"><button th:unless="${f.isOnefile()}" class="btn btn-danger" name="removeFileName" th:value="${f.pathname}">X</button></td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+        </form>
+        <a class="btn btn-success" th:href="@{/}">Choose disk</a>
+        <script type="text/javascript" src="jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="bootstrap.js"></script>
+    </body>
+</html>

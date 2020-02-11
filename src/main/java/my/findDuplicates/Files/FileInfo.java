@@ -24,4 +24,6 @@ public class FileInfo {
 
     final private String pathname;
     final private long size;
+    private boolean remove = false;
+    private boolean onefile = false;
 }

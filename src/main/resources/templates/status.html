@@ -26,8 +26,9 @@ and open the template in the editor.
             function retrieveStatus() {
                 url = 'status';
                 $.ajax({url: url, success: function (data) {
-                        if (data.includes('<table class=')) {
+                        if (data.includes('ready')) {
                             clearInterval(idtimer);
+                            window.location.href = "result";
                         }
                         if (responsetext != data) {
                             $("#status").html(data);
